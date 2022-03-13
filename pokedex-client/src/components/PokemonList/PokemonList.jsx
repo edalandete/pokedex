@@ -1,19 +1,22 @@
 import React, {
-  useEffect
+  useEffect, useState
 } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import loadPokemons from '../../redux/actions/actionCreators';
+import fetchFirstGenerationPokemon from '../../redux/actions/actionCreators';
 import './pokemonList.scss';
 
 function PokemonsList() {
-  const dispatch = useDispatch();
-  const pokemons = useSelector((store) => store.pokemons);
+  const [poke, setPoke] = useState([]);
 
   useEffect(() => {
-    console.log('inn');
-    if (!pokemons.length) {
-      dispatch(loadPokemons(151));
+    if (!poke.length) {
+      const firstGeneration = fetchFirstGenerationPokemon();
+      firstGeneration.then((response) => {
+        setPoke(response);
+      })
+        .catch(
+          setPoke([])
+        );
     }
   }, []);
 
@@ -32,11 +35,11 @@ function PokemonsList() {
 
       <ul className="pokemons-list">
         {
-              pokemons && pokemons.map((pokemon) => (
+              poke && poke.map((pokemon) => (
                 <li className="pokemons-list__item" key={pokemon.id}>
                   <Link to={`/${pokemon.id}`} data-testid={pokemon.id}>
                     <div>
-                      <img src={pokemon.thumbnail} alt={pokemon.name} className="thumbnail" />
+                      <img src={pokemon?.sprites?.front_default} alt={pokemon.name} className="thumbnail" />
                     </div>
                     <p>{pokemon.name}</p>
                   </Link>
