@@ -33,16 +33,16 @@ function PokemonsList() {
 
       </section>
 
-      <ul className="pokemons-list">
+      <ul className="gallery">
         {
               poke && poke.map((pokemon) => (
-                <li className="pokemons-list__item" key={pokemon.id}>
+                <li className="pokemon" key={pokemon.id}>
                   <Link to={`/${pokemon.id}`} data-testid={pokemon.id}>
                     <div>
-                      <img src={pokemon?.sprites?.front_default} alt={pokemon.name} className="thumbnail" />
+                      <img src={pokemon?.sprites?.front_default} alt={pokemon.name} className="pokemon-poster" />
                     </div>
-                    <p>{pokemon.name}</p>
                   </Link>
+                  <span className="pokemon--bold">{pokemon.name}</span>
                 </li>
               ))
           }

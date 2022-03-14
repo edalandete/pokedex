@@ -1,51 +1,34 @@
-main {
-    margin: 0 auto;
-    width: 1080px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+
+.gallery {
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 22rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
-.pokemons-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:center;
 
-    &__item {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        height: 130px;
-        justify-content: space-between;
-        margin: 1em 0;
-        padding: 5px;
-        width: 250px;
-
-        a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            p {
-                font-weight: bolder;
-                padding: 0.8em 0;
-            }
-        }
-
-        div {
-            height: 100px;
-            width: 100px;
-        }
+.pokemon {
+    border: solid 1px;
+    border-radius: 5px;
+    text-align: center;
+    &--bold {
+        font-weight: bold;
     }
 }
 
-.thumbnail {
-    height: 100%;
-    object-fit: cover;
+.pokemon:hover {
+    background-color: #E6E6E6;
+}
+.pokemon-poster {
     width: 100%;
-    border-radius: 1rem;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    transition: 200ms;
-
-    &:hover {
-        transform: scale(1.1);
-    }
+    height: 80%;
+    object-fit: scale-down;
 }
 
 .filter-text {
