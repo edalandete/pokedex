@@ -6,17 +6,26 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
  }
 
+ main {
+     margin: 0 auto;
+     width: 90vw;
+ }
+
 .gallery {
     display: grid;
-    gap: 1rem;
+    gap: 2rem;
     grid-auto-rows: 22rem;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
 
 .pokemon {
+    display: flex;
     border: solid 1px;
     border-radius: 5px;
     text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     &--bold {
         font-weight: bold;
     }

@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter, Route, Routes, Navigate
+} from 'react-router-dom';
 
 import './App.css';
 // import PokemonDetail from './components/PokemonDetail/PokemonDetail';
@@ -11,7 +13,8 @@ function App() {
       <h1>Pokemons</h1>
       <div className="App">
         <Routes>
-          <Route path="/" exact element={<PokemonList />} />
+          <Route path="/pokemon" element={<PokemonList />} />
+          <Route exact path="/" element={<Navigate to="/pokemon" />} />
         </Routes>
       </div>
     </BrowserRouter>
