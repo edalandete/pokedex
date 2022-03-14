@@ -2,7 +2,7 @@ import React, {
   useEffect, useState
 } from 'react';
 import { Link } from 'react-router-dom';
-import fetchFirstGenerationPokemon from '../../redux/actions/actionCreators';
+import fetchFirstGenerationPokemon from '../../api/pokemon.service';
 import './pokemonList.scss';
 
 function PokemonsList() {
