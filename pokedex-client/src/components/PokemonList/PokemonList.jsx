@@ -1,21 +1,24 @@
 import React, {
-  useEffect, useState
+  useEffect
 } from 'react';
 import { Link } from 'react-router-dom';
-import fetchFirstGenerationPokemon from '../../redux/actions/actionCreators';
+import { useDispatch, useSelector } from 'react-redux';
+
+import fetchFirstGenerationPokemon, { loadPokemons } from '../../redux/actions/actionCreators';
 import './pokemonList.scss';
 
 function PokemonsList() {
-  const [poke, setPoke] = useState([]);
+  const dispatch = useDispatch();
+  const pokes = useSelector((store) => store.pokemons);
 
   useEffect(() => {
-    if (!poke.length) {
+    if (!pokes.length) {
       const firstGeneration = fetchFirstGenerationPokemon();
       firstGeneration.then((response) => {
-        setPoke(response);
+        dispatch(loadPokemons(response));
       })
         .catch(
-          setPoke([])
+          console.error('error')
         );
     }
   }, []);
@@ -35,7 +38,7 @@ function PokemonsList() {
 
       <ul className="gallery">
         {
-              poke && poke.map((pokemon) => (
+              pokes && pokes.map((pokemon) => (
                 <li className="pokemon" key={pokemon.id}>
                   <Link to={`/${pokemon.id}`} data-testid={pokemon.id}>
                     <div>
