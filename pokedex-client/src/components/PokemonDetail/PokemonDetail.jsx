@@ -2,13 +2,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import PropTypes from 'prop-types';
 
 import './pokemonDetail.scss';
 import { getPokemonByName, getPokemonAbilities, getPokemonTypes } from '../../redux/selectors/pokemon.selector';
 
 function PokemonDetail({ pokemons }) {
+  const navigate = useNavigate();
+
   const { name } = useParams();
   const selectedPokemon = getPokemonByName(pokemons, name);
   const pokemonAbilities = getPokemonAbilities(selectedPokemon);
@@ -45,6 +47,8 @@ function PokemonDetail({ pokemons }) {
             </ul>
           </li>
         </ul>
+        <button type="button" onClick={() => navigate(-1)} className="buttons buttons--back"> Go Back </button>
+
       </div>
     </main>
   );
