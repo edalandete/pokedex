@@ -1,19 +1,5 @@
+import { getPokemonsByName } from '../selectors/pokemon.selector';
 import actionTypes from './actionTypes';
-
-const urlGeneration = 'https://pokeapi.co/api/v2/pokemon?limit=151&offset=0';
-
-function fetchPokemonData({ url }) {
-  return fetch(url)
-    .then((response) => response.json())
-    .then((pokeData) => pokeData);
-}
-
-export function fetchFirstGenerationPokemon() {
-  return fetch(urlGeneration)
-    .then((response) => response.json())
-    // eslint-disable-next-line max-len
-    .then((allpokemon) => Promise.all(allpokemon.results.map(async (pokemon) => fetchPokemonData(pokemon))));
-}
 
 export function loadPokemons(pokemons) {
   return (dispatch) => {
@@ -21,5 +7,24 @@ export function loadPokemons(pokemons) {
       type: actionTypes.LOAD_POKEMONS,
       pokemons
     });
+  };
+}
+
+export function filterPokemons(pokemons, searchValue) {
+  return async (dispatch) => {
+    try {
+      const filteredPokemons = searchValue
+        ? getPokemonsByName(pokemons, searchValue)
+        : pokemons;
+
+      dispatch({
+        type: actionTypes.FILTER_POKEMONS,
+        filteredPokemons
+      });
+    } catch (error) {
+      dispatch({
+        type: actionTypes.FILTER_POKEMONS_ERROR
+      });
+    }
   };
 }

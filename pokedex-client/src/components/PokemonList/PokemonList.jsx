@@ -1,15 +1,20 @@
 import React, {
-  useEffect
+  useEffect, useState
 } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchFirstGenerationPokemon, loadPokemons } from '../../redux/actions/actionCreators';
+import { loadPokemons, filterPokemons } from '../../redux/actions/actionCreators';
+import fetchFirstGenerationPokemon from '../../api/pokemon.service';
 import './pokemonList.scss';
 
 function PokemonsList() {
+  const [searchValue, setSearchValue] = useState('');
+
   const dispatch = useDispatch();
   const pokes = useSelector((store) => store.pokemons);
+  const filteredPokes = useSelector((store) => store.filteredPokemons);
+  console.log(filteredPokes, 'filter');
 
   useEffect(() => {
     if (!pokes.length) {
@@ -23,6 +28,10 @@ function PokemonsList() {
     }
   }, []);
 
+  const handleInputChange = (event) => setSearchValue(event.target.value);
+
+  const filterValues = () => dispatch(filterPokemons(pokes, searchValue));
+
   return (
     <main>
       <h1>Pokrmons List</h1>
@@ -32,13 +41,17 @@ function PokemonsList() {
           name="filterText"
           className="filter-text"
           placeholder="Search"
+          onChange={handleInputChange}
+          value={searchValue}
         />
+
+        <button type="button" onClick={filterValues} className="buttons buttons--search">Search</button>
 
       </section>
 
       <ul className="gallery">
         {
-              pokes && pokes.map((pokemon) => (
+              filteredPokes && filteredPokes.map((pokemon) => (
                 <li className="pokemon" key={pokemon.id}>
                   <Link to={`/pokemon/${pokemon.name}`} data-testid={pokemon.id}>
                     <div>
