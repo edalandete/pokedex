@@ -8,7 +8,7 @@ function fetchPokemonData({ url }) {
     .then((pokeData) => pokeData);
 }
 
-export default function fetchFirstGenerationPokemon() {
+export function fetchFirstGenerationPokemon() {
   return fetch(urlGeneration)
     .then((response) => response.json())
     // eslint-disable-next-line max-len
