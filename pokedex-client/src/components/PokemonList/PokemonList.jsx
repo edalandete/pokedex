@@ -4,7 +4,7 @@ import React, {
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import fetchFirstGenerationPokemon, { loadPokemons } from '../../redux/actions/actionCreators';
+import { fetchFirstGenerationPokemon, loadPokemons } from '../../redux/actions/actionCreators';
 import './pokemonList.scss';
 
 function PokemonsList() {
@@ -40,7 +40,7 @@ function PokemonsList() {
         {
               pokes && pokes.map((pokemon) => (
                 <li className="pokemon" key={pokemon.id}>
-                  <Link to={`/${pokemon.id}`} data-testid={pokemon.id}>
+                  <Link to={`/pokemon/${pokemon.name}`} data-testid={pokemon.id}>
                     <div>
                       <img src={pokemon?.sprites?.front_default} alt={pokemon.name} className="pokemon-poster" />
                     </div>

@@ -1,88 +1,50 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useParams, useHistory } from 'react-router';
-import './pokemonDetail.scss';
+import { connect } from 'react-redux';
 
-function PokemonDetail({ pokemon }) {
-  const history = useHistory();
-  const { id } = useParams();
+import { useParams } from 'react-router';
+import PropTypes from 'prop-types';
+
+import './pokemonDetail.scss';
+import { getPokemonByName, getPokemonAbilities, getPokemonTypes } from '../../redux/selectors/pokemon.selector';
+
+function PokemonDetail({ pokemons }) {
+  const { name } = useParams();
+  const selectedPokemon = getPokemonByName(pokemons, name);
+  const pokemonAbilities = getPokemonAbilities(selectedPokemon);
+  const pokemonTypes = getPokemonTypes(selectedPokemon);
 
   return (
     <main>
       <h1>
-        {' '}
-        {pokemon.name}
-        {' '}
-        Detail
+        {selectedPokemon.name}
       </h1>
-      <div className="orc-details">
+      <div className="pokemon-details">
         <div className="image-container">
-          <img src={pokemon.thumbnail} alt={pokemon.name} className="profile-picture" />
+          <img src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${selectedPokemon.name}.gif`} alt={selectedPokemon.name} className="profile-picture" />
         </div>
-        <ul className="orc-details__data">
-          <li className="data__item">
-            <p>
-              <span className="badge">Name: </span>
-              {pokemon.name}
-
-            </p>
+        <ul className="pokemon-details__data">
+          <li className="data__item" key={selectedPokemon.id}>
+            <span className="badge">ID: </span>
+            {selectedPokemon.id}
           </li>
-          <li className="data__item">
-            <p>
-              <span className="badge">Age: </span>
-              {pokemon.age}
-
-            </p>
+          <li className="data__item" key="types">
+            <span className="badge">Types: </span>
+            <ul>
+              {pokemonTypes.map((type) => (<li key={type}>{type}</li>))}
+            </ul>
           </li>
-          <li className="data__item">
-            <p>
-              <span className="badge">Height: </span>
-              {pokemon.weight}
-
-            </p>
+          <li className="data__item" key="height">
+            <span className="badge">Height: </span>
+            {selectedPokemon.height}
           </li>
-          <li className="data__item">
-            <p>
-              <span className="badge">Weight: </span>
-              {pokemon.height}
-
-            </p>
-          </li>
-          <li className="data__item">
-            <p>
-              <span className="badge">Hair Color: </span>
-              {pokemon.hair_color}
-
-            </p>
-          </li>
-          <li className="data__item">
-            <p>
-              <span className="badge">Professions: </span>
-              {pokemon.professions && pokemon.professions.map((profession) => (
-                <span>
-                  { profession }
-                  {' '}
-                </span>
-              ))}
-
-            </p>
-          </li>
-          <li className="data__item">
-            <p>
-              <span className="badge">Friends: </span>
-              {orcFriends.length ? orcFriends.map((friend) => (
-                <Link to={`/${friend.id}`} className="links">
-                  { friend.name }
-                  {' '}
-                </Link>
-              ))
-                : <span>No friends</span>}
-
-            </p>
+          <li className="data__item" kry="abilities">
+            <span className="badge">Abilities: </span>
+            <ul>
+              {pokemonAbilities.map((ability) => (<li key={ability}>{ability}</li>))}
+            </ul>
           </li>
         </ul>
-        <button type="button" onClick={history.goBack} className="buttons buttons--back"> Go Back </button>
       </div>
     </main>
   );
@@ -92,9 +54,9 @@ PokemonDetail.propTypes = {
   pokemon: PropTypes.shape({}).isRequired
 };
 
-function mapStateToProps({ orcs }) {
+function mapStateToProps({ pokemons }) {
   return {
-    orcs
+    pokemons
   };
 }
 export default connect(mapStateToProps)(PokemonDetail);
