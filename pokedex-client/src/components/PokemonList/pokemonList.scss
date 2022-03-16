@@ -11,6 +11,12 @@
      width: 90vw;
  }
 
+ .links {
+     text-decoration: none;
+     color: #2f2f2f;
+
+ }
+
 .gallery {
     display: grid;
     gap: 2rem;
@@ -36,16 +42,17 @@
 }
 .pokemon-poster {
     width: 100%;
-    height: 80%;
+    height: 100%;
     object-fit: scale-down;
 }
 
 .filter-text {
     width: 300px;
-    padding: 10px 50px;
+    padding: 1rem 1rem;
+    margin-bottom: 5rem;
     border: none;
-    border-radius: 40px;
-    background-color: rgb(238, 238, 238);
-    color: rgb(47, 47, 47);
-    margin-right: 15px;
+    border-radius: 1rem;
+    background-color: #eeeeee;
+    color: #2f2f2f;
+    margin-right: 1rem;
 }

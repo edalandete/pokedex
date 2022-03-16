@@ -10,7 +10,6 @@ import PokemonList from './components/PokemonList/PokemonList';
 function App() {
   return (
     <BrowserRouter>
-      <h1>Pokemons</h1>
       <div className="App">
         <Routes>
           <Route path="/pokemon" element={<PokemonList />} />
