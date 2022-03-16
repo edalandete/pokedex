@@ -3,6 +3,8 @@
 import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import configureStore from '../redux/store';
 
 function render(
   ui,
@@ -13,9 +15,11 @@ function render(
 ) {
   function Wrapper({ children }) {
     return (
-      <Router>
-        {children}
-      </Router>
+      <Provider store={configureStore(initialState)}>
+        <Router>
+          {children}
+        </Router>
+      </Provider>
     );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });

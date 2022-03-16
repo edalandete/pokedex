@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { getPokemonsByName } from '../../redux/selectors/pokemon.selector';
 import { loadPokemons, filterPokemons } from '../../redux/actions/actionCreators';
 import fetchFirstGenerationPokemon from '../../api/pokemon.service';
 import './pokemonList.scss';
@@ -29,7 +29,13 @@ function PokemonsList() {
 
   const handleInputChange = (event) => setSearchValue(event.target.value);
 
-  const filterValues = () => dispatch(filterPokemons(pokes, searchValue));
+  const filterValues = () => {
+    const filteredPokemons = searchValue
+      ? getPokemonsByName(pokes, searchValue)
+      : pokes;
+
+    dispatch(filterPokemons(filteredPokemons));
+  };
 
   const clearFilter = () => dispatch(filterPokemons(pokes));
 

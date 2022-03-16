@@ -1,4 +1,3 @@
-import { getPokemonsByName } from '../selectors/pokemon.selector';
 import actionTypes from './actionTypes';
 
 export function loadPokemons(pokemons) {
@@ -10,13 +9,9 @@ export function loadPokemons(pokemons) {
   };
 }
 
-export function filterPokemons(pokemons, searchValue) {
+export function filterPokemons(filteredPokemons) {
   return async (dispatch) => {
     try {
-      const filteredPokemons = searchValue
-        ? getPokemonsByName(pokemons, searchValue)
-        : pokemons;
-
       dispatch({
         type: actionTypes.FILTER_POKEMONS,
         filteredPokemons
