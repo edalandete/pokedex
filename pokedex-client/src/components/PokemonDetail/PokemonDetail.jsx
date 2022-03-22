@@ -19,31 +19,33 @@ function PokemonDetail({ pokemons }) {
   return (
     <main>
       <h1>
-        {selectedPokemon.name}
+        {selectedPokemon?.name}
       </h1>
       <div className="pokemon-details">
         <div className="image-container">
-          <img src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${selectedPokemon.name}.gif`} alt={selectedPokemon.name} className="profile-picture" />
+          <img src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${selectedPokemon?.name}.gif`} alt={selectedPokemon?.name} className="profile-picture" />
         </div>
         <ul className="pokemon-details__data">
-          <li className="data__item" key={selectedPokemon.id}>
+          <li className="data__item" key={selectedPokemon?.id}>
             <span className="badge">ID: </span>
-            {selectedPokemon.id}
+            {selectedPokemon?.id}
           </li>
           <li className="data__item" key="types">
             <span className="badge">Types: </span>
             <ul>
-              {pokemonTypes.map((type) => (<li key={type}>{type}</li>))}
+              {pokemonTypes && pokemonTypes.map((type) => (<li key={type}>{type}</li>))}
             </ul>
           </li>
           <li className="data__item" key="height">
             <span className="badge">Height: </span>
-            {selectedPokemon.height}
+            {selectedPokemon?.height}
           </li>
           <li className="data__item" kry="abilities">
             <span className="badge">Abilities: </span>
             <ul>
-              {pokemonAbilities.map((ability) => (<li key={ability}>{ability}</li>))}
+              {pokemonAbilities && pokemonAbilities.map(
+                (ability) => (<li key={ability}>{ability}</li>)
+              )}
             </ul>
           </li>
         </ul>
