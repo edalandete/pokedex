@@ -2,7 +2,7 @@
 
 1. Clone the repo
 ```
- $ git clone https://github.com/edalandete/axa-api-rest-node-assesment.git
+ $  git clone https://github.com/edalandete/axa-api-rest-node-assesment.git
 ```
 2. Install dependencies
 ```
