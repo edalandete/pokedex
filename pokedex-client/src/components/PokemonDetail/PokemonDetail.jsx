@@ -32,7 +32,12 @@ function PokemonDetail({ pokemons }) {
           </li>
           <li className="data__item" key="types">
             <span className="badge">Types: </span>
-            {pokemonTypes && pokemonTypes.map((type) => (<span>{type}</span>))}
+            {pokemonTypes && pokemonTypes.map((type) => (
+              <span>
+                {type}
+                {' '}
+              </span>
+            ))}
           </li>
           <li className="data__item" key="height">
             <span className="badge">Height: </span>
