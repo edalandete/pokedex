@@ -32,9 +32,7 @@ function PokemonDetail({ pokemons }) {
           </li>
           <li className="data__item" key="types">
             <span className="badge">Types: </span>
-            <ul>
-              {pokemonTypes && pokemonTypes.map((type) => (<li key={type}>{type}</li>))}
-            </ul>
+            {pokemonTypes && pokemonTypes.map((type) => (<span>{type}</span>))}
           </li>
           <li className="data__item" key="height">
             <span className="badge">Height: </span>
@@ -42,11 +40,16 @@ function PokemonDetail({ pokemons }) {
           </li>
           <li className="data__item" kry="abilities">
             <span className="badge">Abilities: </span>
-            <ul>
-              {pokemonAbilities && pokemonAbilities.map(
-                (ability) => (<li key={ability}>{ability}</li>)
-              )}
-            </ul>
+
+            {pokemonAbilities && pokemonAbilities.map(
+              (ability) => (
+                <span>
+                  { ability }
+                  {' '}
+                </span>
+              )
+            )}
+
           </li>
         </ul>
         <button type="button" onClick={() => navigate(-1)} className="buttons buttons--back"> Go Back </button>
