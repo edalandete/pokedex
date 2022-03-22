@@ -6,7 +6,7 @@
 ```
 2. Install dependencies
 ```
- npm install
+ Go to the pokedex-client folder and then run npm install
 ```
 3. Set environment variables following the example in ```.env.example```.
 4. Run the server 
